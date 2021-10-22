@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class KhoaServiceImpl implements KhoaService{
+public class KhoaServiceImpl implements KhoaService {
 
     @Autowired
     private KhoaRepository khoaRepository;
+
     @Override
     public Khoa saveKhoa(Khoa khoa) {
         return khoaRepository.save(khoa);
@@ -35,7 +36,7 @@ public class KhoaServiceImpl implements KhoaService{
     public void deleteKhoaById(Long khoaId) {
         khoaRepository.deleteById(khoaId);
     }
-
+    
     @Override
     public List<Khoa> findAllKhoa() {
         return khoaRepository.findAll();
