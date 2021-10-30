@@ -2,12 +2,15 @@ package com.example.khoaservice.service;
 
 import com.example.khoaservice.entity.Khoa;
 import com.example.khoaservice.repository.KhoaRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class KhoaServiceImpl implements KhoaService {
 
     @Autowired
@@ -18,8 +21,10 @@ public class KhoaServiceImpl implements KhoaService {
         return khoaRepository.save(khoa);
     }
 
+    @Cacheable(value = "khoa")
     @Override
     public Khoa findKhoaById(Long khoaId) {
+        log.info("Cache start");
         return khoaRepository.findById(khoaId).get();
     }
 
@@ -36,7 +41,7 @@ public class KhoaServiceImpl implements KhoaService {
     public void deleteKhoaById(Long khoaId) {
         khoaRepository.deleteById(khoaId);
     }
-    
+
     @Override
     public List<Khoa> findAllKhoa() {
         return khoaRepository.findAll();
